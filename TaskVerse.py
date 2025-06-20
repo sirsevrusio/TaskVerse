@@ -3,7 +3,7 @@ from lib import utils as util
 from datetime import datetime
 from lib.utils import bcolors 
 from uuid import uuid4
-import re
+import webbrowser
 import sys
 
 app = Flask(__name__)
@@ -75,6 +75,7 @@ if __name__ == "__main__":
         util.init()
         print(f"{bcolors.OKBLUE}[INFO]{bcolors.ENDC}{bcolors.OKGREEN} Initialization complete!{bcolors.ENDC}")
     elif parameters[1] == "run":
+        webbrowser.open("http://localhost:6767")
         app.run(host="localhost", port=6767, debug=False)
     elif parameters[1] == "help":
         print(f"{bcolors.OKBLUE}_____HELP_____{bcolors.ENDC}")

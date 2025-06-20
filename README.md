@@ -42,7 +42,7 @@ cd Taskverse
 ```
 
 2. **Create a virtual environment:**
-
+<mark> ** Not Necesaary for Windows Users.** </mark>
 ```bash
 python -m venv venv
 source venv/bin/activate  # On Windows use: venv\Scripts\activate
@@ -54,15 +54,16 @@ source venv/bin/activate  # On Windows use: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-4. **Run the server:**
+4. **Setup the Server:**
 
 ```bash
-python TaskVerse.py
+python TaskVerse.py init
 ```
 
-5. **Open in browser:**
-
-Go to `http://127.0.0.1:6767`
+5. **Run the Application**
+```bash
+python TaskVerse.py run
+```
 
 ---
 
@@ -73,10 +74,12 @@ Taskverse/
 ├── TaskVerse.py               # Main Flask app
 │
 ├── templates/
-│   └── homextasks.html       # Main UI template
+│   ├── homextasks.html       # Main UI template
+│   └── 404.html 
 ├── static/
 │   └── css
-│       └── task.css        # CSS styling
+│       ├── task.css        # CSS styling
+│       └── 404.css
 ├── data
 │    └── schedule.json # File containing tasks
 ├── libs

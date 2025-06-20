@@ -1,0 +1,7 @@
+*.pyo
+*.pyd
+*.pyc
+__pycache__/
+venv/
+data/
+.vscode/

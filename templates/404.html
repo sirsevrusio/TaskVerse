@@ -3,25 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404!</title>
+    <title>404! Page Not Found</title>
+
+    <!-- External CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/404.css') }}">
+
+    <!-- Countdown redirect logic -->
     <script>
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
+
         setTimeout(async function () {
-            for (let i = 5; i > 0; i--){
+            for (let i = 5; i > 0; i--) {
                 document.getElementById("countdown-timer").innerText = i;
                 await sleep(1000);
             }
             document.getElementById("countdown-timer").innerText = '';
-            window.location.href = "{{ url_for('home', endpt='default') }}";
+            window.location.href = "{{ url_for('home', endpt='tasks') }}";
         }, 1000);
     </script>
 </head>
 <body>
-    <h1>It seems you have made a wrong request!</h1>
+
+    <h1>🚫 Oops! You seem to have made a wrong request.</h1>
     <h1 id="countdown-timer">5</h1>
-    <p>You'll be automatically redirected to the homepage in a few seconds.</p>
-    <p>If not, <a href="{{ url_for('home', endpt='default') }}">Click here</a>.</p>
+    <p>You'll be redirected to the homepage shortly.</p>
+    <p>If not, <a href="{{ url_for('home', endpt='default') }}">click here</a>.</p>
+
 </body>
 </html>

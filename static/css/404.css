@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #141e30, #243b55);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    padding: 20px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    animation: bounceIn 1.2s ease;
+}
+
+#countdown-timer {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #00e676;
+    margin: 20px 0;
+    animation: pulse 1s infinite ease-in-out;
+}
+
+p {
+    font-size: 1.2rem;
+    color: #ccc;
+    margin-top: 10px;
+    animation: fadeIn 1.5s ease;
+}
+
+a {
+    color: #66ccff;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #00e6ff;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.7; }
+}
+
+@keyframes bounceIn {
+    0% { opacity: 0; transform: scale(0.3); }
+    50% { opacity: 1; transform: scale(1.05); }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}

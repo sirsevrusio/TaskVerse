@@ -75,7 +75,7 @@ if __name__ == "__main__":
         util.init()
         print(f"{bcolors.OKBLUE}[INFO]{bcolors.ENDC}{bcolors.OKGREEN} Initialization complete!{bcolors.ENDC}")
     elif parameters[1] == "run":
-        app.run(host="localhost", port=6767, debug=True)
+        app.run(host="localhost", port=6767, debug=False)
     elif parameters[1] == "help":
         print(f"{bcolors.OKBLUE}_____HELP_____{bcolors.ENDC}")
         print(f" {bcolors.OKBLUE}init ->{bcolors.ENDC}{bcolors.OKGREEN} To initialize the application{bcolors.ENDC}")

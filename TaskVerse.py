@@ -16,10 +16,14 @@ def index():
 def home():
     endpt = request.args.get("endpt", "tasks")
     if endpt == "tasks":
-        task_data = util.formatter(util.load_data())
-        return render_template("homextasks.html", task_data=task_data)
+        return render_template("homextasks.html")
     else:
         return render_template("404.html")
+
+@app.route("/api/tasks")
+def api_tasks():
+    task_data = util.formatter(util.load_data())
+    return jsonify(task_data)
 
 @app.route('/submitData', methods=['POST'])
 def submit_data():

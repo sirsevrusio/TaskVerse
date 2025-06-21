@@ -77,9 +77,11 @@ Taskverse/
 │   ├── homextasks.html       # Main UI template
 │   └── 404.html 
 ├── static/
-│   └── css
-│       ├── task.css        # CSS styling
-│       └── 404.css
+│   ├── css
+│   │   ├── task.css        # CSS styling
+│   │   └── 404.css
+│   └── js
+│       └── tasks.js
 ├── data
 │    └── schedule.json # File containing tasks
 ├── libs

@@ -1,140 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TASKVERSE | TASKS</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/tasks.css') }}">
-</head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TASKVERSE | TASKS</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/tasks.css') }}">
+
+  </head>
 <body>
-    <a href="https://github.com/SirSevrusIO/TaskVerse" target="_blank" id="github-link" aria-label="GitHub Repository">
+  <!-- GitHub Repo -->
+  <a href="https://github.com/SirSevrusIO/TaskVerse" target="_blank" id="github-link" aria-label="GitHub Repository">
     <svg viewBox="0 0 16 16" width="32" height="32" fill="currentColor" aria-hidden="true">
-        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 
-        6.53 5.47 7.59.4.07.55-.17.55-.38 
-        0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52
-        -.01-.53.63-.01 1.08.58 1.23.82.72 1.21 
-        1.87.87 2.33.66.07-.52.28-.87.51-1.07
-        -1.78-.2-3.64-.89-3.64-3.95 
-        0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 
-        0 0 .67-.21 2.2.82A7.65 7.65 0 0 1 8 4.8
-        c.68.003 1.37.092 2.01.27 
-        1.52-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 
-        2.12.51.56.82 1.27.82 2.15 
-        0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 
-        0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 
-        8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 
+      6.53 5.47 7.59.4.07.55-.17.55-.38 
+      0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52
+      -.01-.53.63-.01 1.08.58 1.23.82.72 1.21 
+      1.87.87 2.33.66.07-.52.28-.87.51-1.07
+      -1.78-.2-3.64-.89-3.64-3.95 
+      0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 
+      0 0 .67-.21 2.2.82A7.65 7.65 0 0 1 8 4.8
+      c.68.003 1.37.092 2.01.27 
+      1.52-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 
+      2.12.51.56.82 1.27.82 2.15 
+      0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 
+      0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 
+      8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
     </svg>
-</a>
+  </a>
+
+  <h1>Your Tasks</h1>
+
+  <!-- Floating Button Container -->
+<div id="add-task-container">
+  <button id="add-task-btn">➕ Add Task</button>
+</div>
+
+<!-- Form stays in center -->
+<form id="taskForm" class="collapsed" hidden>
+  <input type="text" id="name" name="name" placeholder="Enter your task" required>
+  <input type="datetime-local" id="deadline" name="deadline" required>
+  <button type="submit">Add Task</button>
+</form>
 
 
-    <h1>Your Tasks</h1>
+  <div id="flash-message"></div>
 
-    <button id="add-task-btn">➕ New Task</button>
+  <!-- Spinner -->
+  <div id="spinner"><div class="loader"></div></div>
 
-    <form id="taskForm">
-        <input type="text" id="name" name="name" placeholder="Enter your task" required>
-        <input type="datetime-local" id="deadline" name="deadline" required>
-        <button type="submit">Add Task</button>
-    </form>
+  <!-- Task Table -->
+  <div id="task-table-container" style="display: none;">
+    <table>
+      <thead>
+        <tr>
+          <th>⏳</th>
+          <th>Name</th>
+          <th>Deadline</th>
+          <th>Day</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="task-table-body"></tbody>
+    </table>
+  </div>
 
-    <div id="flash-message"></div>
+  <p id="no-tasks" class="no-tasks" style="display: none;">No tasks available at the moment.</p>
 
-    {% if task_data %}
-        <table>
-            <thead>
-                <tr>
-                    <th>Task ID</th>
-                    <th>Name</th>
-                    <th>Deadline</th>
-                    <th>Day</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for task in task_data %}
-                    <tr>
-                        <td>{{ task[0] }}</td>
-                        <td>{{ task[1] }}</td>
-                        <td>{{ task[2] }}</td>
-                        <td>{{ task[3] }}</td>
-                        <td>
-                            <button class="done-btn" onclick="markAsDone('{{ task[0] }}')">✅ Done</button>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p class="no-tasks">No tasks available at the moment.</p>
-    {% endif %}
-
-    <script>
-        const form = document.getElementById('taskForm');
-        const addBtn = document.getElementById('add-task-btn');
-        const flashMessage = document.getElementById('flash-message');
-
-        addBtn.addEventListener('click', () => {
-            form.style.display = form.style.display === 'none' ? 'block' : 'none';
-        });
-
-        function showFlashMessage(text, type) {
-            flashMessage.textContent = text;
-            flashMessage.className = type === 'success' ? 'success' : 'error';
-            flashMessage.style.display = 'block';
-
-            setTimeout(() => {
-                flashMessage.style.display = 'none';
-            }, 5000);
-        }
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
-
-            try {
-                const res = await fetch('/submitData', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-
-                const result = await res.json();
-
-                if (result.success) {
-                    showFlashMessage('✅ Task Added', 'success');
-                    form.reset();
-                    setTimeout(() => location.reload(), 800);
-                } else {
-                    showFlashMessage('❌ Error Adding Task', 'error');
-                }
-            } catch (err) {
-                showFlashMessage('❌ Server Error', 'error');
-                console.error(err);
-            }
-        });
-
-        async function markAsDone(taskId) {
-            try {
-                const res = await fetch(`/remove?id=${taskId}`, {
-                    method: 'DELETE'
-                });
-
-                const result = await res.json();
-
-                if (result.success) {
-                    showFlashMessage('🎉 Congrats! You have completed a task!', 'success');
-                    setTimeout(() => location.reload(), 800);
-                } else {
-                    showFlashMessage("😅 I think you haven't done that.", 'error');
-                }
-            } catch (err) {
-                showFlashMessage('❌ Server Error during deletion', 'error');
-                console.error(err);
-            }
-        }
-    </script>
-
+  <script src="{{ url_for('static', filename='js/tasks.js') }}"></script>
 </body>
 </html>

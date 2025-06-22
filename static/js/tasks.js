@@ -166,3 +166,28 @@ window.onload = () => {
   loadTasks(true);
   setInterval(() => loadTasks(false), 30000);
 };
+
+document.getElementById("stop-server-btn").addEventListener("click", () => {
+    fetch("/home?endpt=stop")
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === true) {
+                showStopMessage("Application Closed");
+            } else {
+                showStopMessage("Unexpected response from server");
+            }
+        })
+        .catch(() => {
+            showStopMessage("Application already closed");
+        });
+});
+
+function showStopMessage(message) {
+    const msgBox = document.getElementById("stop-message");
+    msgBox.textContent = message;
+    msgBox.style.display = "block";
+
+    setTimeout(() => {
+        msgBox.style.display = "none";
+    }, 5000);
+}

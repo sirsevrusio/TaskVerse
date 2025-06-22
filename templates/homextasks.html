@@ -33,6 +33,7 @@
   <!-- Floating Button Container -->
 <div id="add-task-container">
   <button id="add-task-btn">➕ Add Task</button>
+  <button id="stop-server-btn">🛑 Close</button>
 </div>
 
 <!-- Form stays in center -->
@@ -44,6 +45,20 @@
 
 
   <div id="flash-message"></div>
+  <div id="stop-message" style="
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #ff4d4d;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 9999;
+">
+</div>
 
   <!-- Spinner -->
   <div id="spinner"><div class="loader"></div></div>
